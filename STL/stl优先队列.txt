@@ -1,0 +1,92 @@
+priority_queue用法
+
+不用结构体默认是大根堆。
+（cmp将结构体以val由大到小排列，组成大根堆）
+
+struct Node
+{int adj;
+ int val;
+};
+struct cmp
+{bool operator()(Node a,Node b) { return  a.val > b.val; }
+};
+priority_queue<Node,vector<Node>,cmp>Q; 
+
+重载<：：：
+struct node{
+     int x,d;
+     node(){}
+     node(int a,int b){x=a;d=b;}
+     bool operator < (const node & a) const
+     {
+         if(d==a.d) return x<a.x;
+         else return d > a.d;
+     }
+};
+
+#include <iostream>  
+#include <queue>  
+using namespace std;  
+int main(){  
+    priority_queue<int,vector<int>,greater<int> >q;  
+    for(int i=0;i<10;i++)   
+        q.push(i);  
+    while(!q.empty()){  
+        cout<<q.top()<< endl;  
+        q.pop();  
+    }  
+    return 0;  
+}  
+
+
+自定义类型需要重载操作符 <，此时定义只能带一个参数模板
+#include <iostream>  
+#include <queue>  
+using namespace std;  
+struct Node{  
+    int x, y;  
+}node;  
+ bool operator<( Node a, Node b){  
+    if(a.x==b.x) return a.y>b.y;  
+    return a.x>b.x;  
+}  
+ int main(){  
+    priority_queue<Node>q;  
+    for(int i=0;i<10;i++){  
+        node.x=i;  
+        node.y=10-i/2;  
+        q.push(node);  
+    }     
+    while(!q.empty()){  
+        cout<<q.top().x <<' '<<q.top().y<<endl;  
+        q.pop();  
+    }  
+    return 0;  
+}  
+
+重载>需要这样写：
+#include <iostream>  
+#include <queue>  
+using namespace std;  
+struct Node{  
+    int x, y;  
+}node;  
+struct cmp{  
+    bool operator()(Node a,Node b){  
+        if(a.x==b.x) return a.y>b.y;  
+        return a.x>b.x;}  
+};  
+  
+ int main(){  
+    priority_queue<Node,vector<Node>,cmp>q;  
+    for(int i=0;i<10;i++){  
+        node.x=i;  
+        node.y=10-i/2;  
+        q.push(node);     
+    }     
+    while(!q.empty()){  
+        cout<<q.top().x<<' '<<q.top().y<<endl;  
+        q.pop();  
+    }  
+    return 0;  
+}  
