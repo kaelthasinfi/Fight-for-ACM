@@ -2,9 +2,10 @@
 #include<cstdio>
 #include<cstring>
 #include<vector>
+#include<cmath>
 #define MAX 1000007
 using namespace std;
-vector<int>p;
+/*vector<int>p;
 int mark[MAX+100];
 int init()
 {
@@ -21,33 +22,48 @@ int init()
             t = t + i;
         }
     }
-}
-int phi(long long x)
+}*/
+
+////求单值欧拉函数， 可修改为筛法
+
+long long phi(long long x)
 {
     long long ans = x;
-    int i = 0;
-    int l = p.size();
-    while (p[i] <= x && i < l)
+    long long i;
+    long long  l = sqrt(x);
+    if (x % 2 == 0)
     {
-        if (x % p[i] == 0)
+        ans = ans / 2;
+        while (x % 2 == 0)
+            x = x / 2;
+    }
+    i = 3;
+    while (i * i <= x)
+    {
+        if (x % i == 0)
         {
-            ans = ans * (p[i]-1);
-            ans = ans / p[i];
-            while (x % p[i] == 0)
-                x = x / p[i];
+            ans = ans / i;
+            ans = ans * (i-1);
+            while (x % i == 0)
+                x = x / i;
         }
-        i++;
+        i = i + 2;
+    }
+    if (x != 1)
+    {
+        ans = ans /x;
+        ans = ans *(x-1);
     }
     return ans;
 }
 int main()
 {
     long long n;
-    init();
+    //init();
     while (scanf("%lld", &n) != EOF)
     {
         if (n == 0) break;
-        printf("%d\n", phi(n));
+        printf("%lld\n", phi(n));
     }
     return 0;
 }
