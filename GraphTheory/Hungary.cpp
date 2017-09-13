@@ -9,7 +9,7 @@ bool dfs(int u)
 {
 	int v;
 	for (v = 1; v <= n; ++v)
-		if (a[u][v] == 1 	&& !used[v])
+		if (a[u][v] == 1 && !used[v])
 		{
 			used[v] = 1;
 			if (link[v] == -1 || dfs(link[v]))
@@ -57,7 +57,7 @@ int main()
 //			printf("%d\n", hungary());
 			printf("YES\n");
 		}
-		else 
+		else
 		{
 			printf("NO\n");
 //			printf("%d\n", hungary());
